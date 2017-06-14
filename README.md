@@ -14,6 +14,9 @@ Moved to core since 7.2 (was in the optional XML extension earlier):
 - [`utf8_encode`](https://php.net/utf8_encode)
 - [`utf8_decode`](https://php.net/utf8_decode)
 
+Also, it provides a constant added to PHP 7.2:
+- [`PHP_OS_FAMILY`](http://php.net/manual/en/reserved.constants.php#constant.php-os-family)
+
 More information can be found in the
 [main Polyfill README](https://github.com/symfony/polyfill/blob/master/README.md).
 

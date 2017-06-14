@@ -13,6 +13,7 @@ namespace Symfony\Polyfill\Php72;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
+ * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
@@ -59,5 +60,24 @@ final class Php72
         }
 
         return substr($s, 0, $j);
+    }
+
+    public static function php_os_family()
+    {
+        if ('\\' === DIRECTORY_SEPARATOR) {
+            return 'Windows';
+        }
+
+        $map = array(
+            'Darwin' => 'Darwin',
+            'DragonFly' => 'BSD',
+            'FreeBSD' => 'BSD',
+            'NetBSD' => 'BSD',
+            'OpenBSD' => 'BSD',
+            'Linux' => 'Linux',
+            'SunOS' => 'Solaris',
+        );
+
+        return isset($map[PHP_OS]) ? $map[PHP_OS] : 'Unknown';
     }
 }
