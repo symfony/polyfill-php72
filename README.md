@@ -3,6 +3,7 @@ Symfony Polyfill / Php72
 
 This component provides functions added to PHP 7.2 core:
 
+- [`spl_object_id`](https://php.net/spl_object_id)
 - [`stream_isatty`](https://php.net/stream_isatty)
 
 On Windows only:
