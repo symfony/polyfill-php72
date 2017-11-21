@@ -13,10 +13,10 @@ use Symfony\Polyfill\Php72 as p;
 
 if (PHP_VERSION_ID < 70200) {
     if ('\\' === DIRECTORY_SEPARATOR && !function_exists('sapi_windows_vt100_support')) {
-        function sapi_windows_vt100_support() { return false; }
+        function sapi_windows_vt100_support($stream, $enable = null) { return p\Php72::sapi_windows_vt100_support($stream, $enable); }
     }
     if (!function_exists('stream_isatty')) {
-        function stream_isatty($stream) { return function_exists('posix_isatty') && @posix_isatty($stream); }
+        function stream_isatty($stream) { return p\Php72::stream_isatty($stream); }
     }
     if (!function_exists('utf8_encode')) {
         function utf8_encode($s) { return p\Php72::utf8_encode($s); }
