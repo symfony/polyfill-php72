@@ -39,7 +39,7 @@ final class Php72
 
     public static function utf8_decode($s)
     {
-        $s .= '';
+        $s = (string) $s;
         $len = strlen($s);
 
         for ($i = 0, $j = 0; $i < $len; ++$i, ++$j) {
