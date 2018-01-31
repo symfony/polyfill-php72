@@ -95,6 +95,34 @@ final class Php72
         return self::$hashMask ^ hexdec(substr($hash, 16 - \PHP_INT_SIZE, \PHP_INT_SIZE));
     }
 
+    public static function sapi_windows_vt100_support($stream, $enable = null)
+    {
+        // We cannot actually disable vt100 support if it is set
+        if (false === $enable || !self::stream_isatty($stream)) {
+            return false;
+        }
+
+        // The native function does not apply to stdin
+        $meta = array_map('strtolower', stream_get_meta_data($stream));
+        $stdin = 'php://stdin' === $meta['uri'] || 'php://fd/0' === $meta['uri'];
+
+        return !$stdin
+            && (false !== getenv('ANSICON')
+            || 'ON' === getenv('ConEmuANSI')
+            || 'xterm' === getenv('TERM'));
+    }
+
+    public static function stream_isatty($stream)
+    {
+        if ('\\' === DIRECTORY_SEPARATOR) {
+            $stat = @fstat($stream);
+            // Check if formatted mode is S_IFCHR
+            return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
+        }
+
+        return function_exists('posix_isatty') && @posix_isatty($stream);
+    }
+
     private static function initHashMask()
     {
         $obj = (object) array();
