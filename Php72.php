@@ -97,13 +97,25 @@ final class Php72
 
     public static function sapi_windows_vt100_support($stream, $enable = null)
     {
+        if (!is_resource($stream)) {
+            trigger_error('sapi_windows_vt100_support() expects parameter 1 to be resource, '.gettype($stream).' given', E_USER_WARNING);
+            return false;
+        }
+
+        $meta = stream_get_meta_data($stream);
+
+        if ('STDIO' !== $meta['stream_type']) {
+            trigger_error('sapi_windows_vt100_support() was not able to analyze the specified stream', E_USER_WARNING);
+            return false;
+        }
+
         // We cannot actually disable vt100 support if it is set
         if (false === $enable || !self::stream_isatty($stream)) {
             return false;
         }
 
         // The native function does not apply to stdin
-        $meta = array_map('strtolower', stream_get_meta_data($stream));
+        $meta = array_map('strtolower', $meta);
         $stdin = 'php://stdin' === $meta['uri'] || 'php://fd/0' === $meta['uri'];
 
         return !$stdin
@@ -114,6 +126,11 @@ final class Php72
 
     public static function stream_isatty($stream)
     {
+        if (!is_resource($stream)) {
+            trigger_error('stream_isatty() expects parameter 1 to be resource, '.gettype($stream).' given', E_USER_WARNING);
+            return false;
+        }
+
         if ('\\' === DIRECTORY_SEPARATOR) {
             $stat = @fstat($stream);
             // Check if formatted mode is S_IFCHR
