@@ -50,7 +50,10 @@ final class Php72
                     $s[$j] = $c < 256 ? \chr($c) : '?';
                     break;
 
-                case "\xF0": ++$i;
+                case "\xF0":
+                    ++$i;
+                    // no break
+
                 case "\xE0":
                     $s[$j] = '?';
                     $i += 2;
