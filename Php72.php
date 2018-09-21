@@ -66,7 +66,7 @@ final class Php72
 
     public static function php_os_family()
     {
-        if ('\\' === DIRECTORY_SEPARATOR) {
+        if ('\\' === \DIRECTORY_SEPARATOR) {
             return 'Windows';
         }
 
@@ -98,7 +98,8 @@ final class Php72
     public static function sapi_windows_vt100_support($stream, $enable = null)
     {
         if (!\is_resource($stream)) {
-            trigger_error('sapi_windows_vt100_support() expects parameter 1 to be resource, '.gettype($stream).' given', E_USER_WARNING);
+            trigger_error('sapi_windows_vt100_support() expects parameter 1 to be resource, '.\gettype($stream).' given', E_USER_WARNING);
+
             return false;
         }
 
@@ -106,6 +107,7 @@ final class Php72
 
         if ('STDIO' !== $meta['stream_type']) {
             trigger_error('sapi_windows_vt100_support() was not able to analyze the specified stream', E_USER_WARNING);
+
             return false;
         }
 
@@ -128,17 +130,18 @@ final class Php72
     public static function stream_isatty($stream)
     {
         if (!\is_resource($stream)) {
-            trigger_error('stream_isatty() expects parameter 1 to be resource, '.gettype($stream).' given', E_USER_WARNING);
+            trigger_error('stream_isatty() expects parameter 1 to be resource, '.\gettype($stream).' given', E_USER_WARNING);
+
             return false;
         }
 
-        if ('\\' === DIRECTORY_SEPARATOR) {
+        if ('\\' === \DIRECTORY_SEPARATOR) {
             $stat = @fstat($stream);
             // Check if formatted mode is S_IFCHR
             return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
         }
 
-        return function_exists('posix_isatty') && @posix_isatty($stream);
+        return \function_exists('posix_isatty') && @posix_isatty($stream);
     }
 
     private static function initHashMask()
