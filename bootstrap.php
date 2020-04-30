@@ -20,6 +20,8 @@ if (PHP_VERSION_ID < 70200) {
     }
     if (!function_exists('utf8_encode')) {
         function utf8_encode($s) { return p\Php72::utf8_encode($s); }
+    }
+    if (!function_exists('utf8_decode')) {
         function utf8_decode($s) { return p\Php72::utf8_decode($s); }
     }
     if (!function_exists('spl_object_id')) {
@@ -28,9 +30,13 @@ if (PHP_VERSION_ID < 70200) {
     if (!defined('PHP_OS_FAMILY')) {
         define('PHP_OS_FAMILY', p\Php72::php_os_family());
     }
-    if (!function_exists('mb_chr')) {
+    if (!function_exists('mb_ord')) {
         function mb_ord($s, $enc = null) { return p\Php72::mb_ord($s, $enc); }
+    }
+    if (!function_exists('mb_chr')) {
         function mb_chr($code, $enc = null) { return p\Php72::mb_chr($code, $enc); }
+    }
+    if (!function_exists('mb_scrub')) {
         function mb_scrub($s, $enc = null) { $enc = null === $enc ? mb_internal_encoding() : $enc; return mb_convert_encoding($s, $enc, $enc); }
     }
 }
