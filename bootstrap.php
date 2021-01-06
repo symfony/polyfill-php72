@@ -11,7 +11,7 @@
 
 use Symfony\Polyfill\Php72 as p;
 
-if (PHP_VERSION_ID >= 70200) {
+if (\PHP_VERSION_ID >= 70200) {
     return;
 }
 
@@ -31,7 +31,7 @@ if (!defined('PHP_OS_FAMILY')) {
     define('PHP_OS_FAMILY', p\Php72::php_os_family());
 }
 
-if ('\\' === DIRECTORY_SEPARATOR && !function_exists('sapi_windows_vt100_support')) {
+if ('\\' === \DIRECTORY_SEPARATOR && !function_exists('sapi_windows_vt100_support')) {
     function sapi_windows_vt100_support($stream, $enable = null) { return p\Php72::sapi_windows_vt100_support($stream, $enable); }
 }
 if (!function_exists('stream_isatty')) {
