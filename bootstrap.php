@@ -27,6 +27,12 @@ if (!defined('PHP_FLOAT_MIN')) {
 if (!defined('PHP_FLOAT_MAX')) {
     define('PHP_FLOAT_MAX', 1.7976931348623157E+308);
 }
+if (!defined('JSON_INVALID_UTF8_IGNORE')) {
+    define('JSON_INVALID_UTF8_IGNORE', 1048576);
+}
+if (!defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
+    define('JSON_INVALID_UTF8_SUBSTITUTE', 2097152);
+}
 if (!defined('PHP_OS_FAMILY')) {
     define('PHP_OS_FAMILY', p\Php72::php_os_family());
 }
