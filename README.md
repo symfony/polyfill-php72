@@ -27,7 +27,7 @@ Also, it provides constants added to PHP 7.2:
 - [`PHP_OS_FAMILY`](https://php.net/reserved.constants#constant.php-os-family)
 
 More information can be found in the
-[main Polyfill README](https://github.com/symfony/polyfill/blob/master/README.md).
+[main Polyfill README](https://github.com/symfony/polyfill/blob/main/README.md).
 
 License
 =======
